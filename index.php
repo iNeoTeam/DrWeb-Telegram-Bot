@@ -234,13 +234,6 @@ $sign";
 		]]);
 	}
 	message($chat_id, $message, "HTML", $button);
-}elseif(!isset($message->document) && $step == "getData" or !isset($message->text) && $step == "getData"){
-	step($chat_id, "none");
-	$message = "❌ورودی مورد نظر مورد تایید نیست.\n$sign";
-	$button = json_encode(['inline_keyboard' => [
-	[['text' => "🔙برگشت", 'callback_data' => "home"]],
-	]]);
-	message($chat_id, $message, "MarkDown", $button);
 }elseif(isset($message->document) && $step == "getData"){
 	step($chat_id, "none");
 	$document = $update->message->document;
@@ -294,6 +287,13 @@ $sign";
 		]]);
 	}
 	message($chat_id, $message, "HTML", $button);
+}elseif(!isset($message->document) && $step == "getData" or !isset($message->text) && $step == "getData"){
+	step($chat_id, "none");
+	$message = "❌ورودی مورد نظر مورد تایید نیست.\n$sign";
+	$button = json_encode(['inline_keyboard' => [
+	[['text' => "🔙برگشت", 'callback_data' => "home"]],
+	]]);
+	message($chat_id, $message, "MarkDown", $button);
 }elseif($text == "/admin" && in_array($chat_id, $admins)){
 	step($chat_id, "none");
 	$message = "🖐سلام مدیر گرامی\n❤️به پنل مدیریت ربات خوش آمدید.\n\n🌀یکی از آیتم های زیر را انتخاب کنید.\n$sign";
